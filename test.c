@@ -18,11 +18,13 @@ int main() {
 
   int i = 6;
   while (i--) {
-    insert_front(head, rand() % 100);
+    head = insert_front(head, rand() % 100);
     print_list(head);
   }
 
-  free_list(head);
+  printf("========== TESTING free_list ==========\n");
+  head = free_list(head);
+  print_list(head);
 
   return 0;
 }

@@ -12,6 +12,11 @@ struct node* make_node(int i) {
 }
 
 void print_list(struct node* n) {
+  if (n == NULL) {
+    printf("\x1b[31mNULL\x1b[0m\n");
+    return;
+  }
+  printf("n != NULL\n");
   struct node* p = n;
   int i = 4;
   while (p != NULL) {
@@ -23,16 +28,30 @@ void print_list(struct node* n) {
 }
 
 struct node* insert_front(struct node* n, int i) {
-  //go through list to end
-  struct node* p = n;
-  while (p->next != NULL) {
-    p = p->next;
-  }
+  //Accidentally added to the end xD
+  //
+  // //go through list to end
+  // struct node* p = n;
+  // while (p->next != NULL) {
+  //   p = p->next;
+  // }
+  //
+  // //add node
+  // p->next = make_node(i);
+  //
+  // return n;
 
-  //add node
-  p->next = make_node(i);
+  //allocate memory for new node
+  struct node* new = calloc(sizeof(struct node), 1);
 
-  return n;
+  //set value
+  new->i = i;
+
+  //point to old head
+  new->next = n;
+
+  //return
+  return new;
 }
 
 //recursive free_list
@@ -42,10 +61,12 @@ struct node* insert_front(struct node* n, int i) {
 struct node* free_list(struct node* n) {
   if (n->next == NULL) {
     free(n);
+    n = NULL;
   }
-  else{
+  else {
     free_list(n->next);
     free(n);
+    n = NULL;
   }
   return n;
 }
