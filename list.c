@@ -16,7 +16,6 @@ void print_list(struct node* n) {
     printf("\x1b[31mNULL\x1b[0m\n");
     return;
   }
-  printf("n != NULL\n");
   struct node* p = n;
   int i = 4;
   while (p != NULL) {
